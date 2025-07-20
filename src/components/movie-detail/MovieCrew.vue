@@ -32,7 +32,7 @@
 <script setup lang="ts">
   import { computed } from 'vue';
   import { useMovieStore } from '@/stores/movieStore';
-  import { getProfileUrl } from '@/utils/api';
+  import { getProfileUrl } from '@/utils/image-utils';
 
   const movieStore = useMovieStore();
 

@@ -65,7 +65,7 @@
   import { useRouter } from 'vue-router';
   import { useMovieStore } from '@/stores/movieStore';
   import type { Movie } from '@/types/movie';
-  import { getImageUrl } from '@/utils/api';
+  import { getImageUrl } from '@/utils/image-utils';
   import { MovieReleaseInfo } from '@/components/movie-release-info';
   import { MovieDialog } from '@/components/movie-dialog';
   import CustomButton from '@/components/ui/CustomButton.vue';

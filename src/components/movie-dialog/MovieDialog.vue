@@ -89,7 +89,7 @@
   import { ref, computed } from 'vue';
   import { useRouter } from 'vue-router';
   import type { Movie } from '@/types/movie';
-  import { getImageUrl } from '@/utils/api';
+  import { getImageUrl } from '@/utils/image-utils';
   import { getYearFromDate, formatDate } from '@/utils/temporal';
   import CustomButton from '@/components/ui/CustomButton.vue';
 

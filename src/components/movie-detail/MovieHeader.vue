@@ -60,7 +60,7 @@
 <script setup lang="ts">
   import { computed } from 'vue';
   import { useMovieStore } from '@/stores/movieStore';
-  import { getImageUrl } from '@/utils/api';
+  import { getImageUrl } from '@/utils/image-utils';
   import { getYearFromDate, formatRuntime } from '@/utils/temporal';
 
   const movieStore = useMovieStore();

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { Movie, MovieDetail, SearchFilters } from '@/types/movie';
-import { searchMovies, getMovieDetails, getGenres } from '@/utils/api';
+import { searchMovies, getMovieDetails, getGenres } from '@/utils/movie-api';
 import { getYearFromDate } from '@/utils/temporal';
 
 export const useMovieStore = defineStore('movie', () => {
