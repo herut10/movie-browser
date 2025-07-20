@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://herut10.github.io/movie-browser",
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=9.0.0"
@@ -12,13 +13,14 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest",
-    "test:ui": "vitest --ui",
-    "deploy": "./scripts/deploy.sh"
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.5.1",
@@ -45,6 +47,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
     "eslint-plugin-vue": "~10.2.0",
+    "gh-pages": "^6.3.0",
     "jiti": "^2.4.2",
     "jsdom": "^26.1.0",
     "npm-run-all2": "^8.0.4",
