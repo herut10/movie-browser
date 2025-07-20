@@ -1,7 +1,14 @@
 <template>
   <div class="movie-list-container d-flex flex-column align-center">
     <!-- Virtualized Movie Grid -->
-    <div ref="containerRef" class="virtual-grid-container">
+    <div
+      ref="containerRef"
+      class="virtual-grid-container"
+      :style="{
+        width: shouldCenter ? `${optimalContainerWidth}px` : '100%',
+        maxWidth: '100%',
+      }"
+    >
       <RecycleScroller
         v-if="movies.length > 0"
         :key="`scroller-${itemsPerRow}`"
@@ -26,7 +33,15 @@
       </RecycleScroller>
 
       <!-- Loading Skeletons -->
-      <div v-if="isLoading && hasMore" class="skeleton-grid">
+      <div
+        v-if="isLoading && hasMore"
+        class="skeleton-grid"
+        :style="{
+          gridTemplateColumns: `repeat(${itemsPerRow}, ${fixedItemWidth}px)`,
+          gap: `${itemGap}px`,
+          justifyContent: 'center',
+        }"
+      >
         <MovieSkeleton v-for="n in 12" :key="n" class="skeleton-item" />
       </div>
     </div>
@@ -99,6 +114,34 @@
     // Ensure at least 1 item per row
     return Math.max(1, itemsThatFit);
   });
+
+  // Calculate optimal container width based on items per row
+  const optimalContainerWidth = computed(() => {
+    const items = itemsPerRow.value;
+    const totalItemWidth = items * fixedItemWidth;
+    const totalGaps = (items - 1) * itemGap;
+    const totalPadding = containerPadding * 2;
+
+    return totalItemWidth + totalGaps + totalPadding;
+  });
+
+  // Calculate if container should be centered
+  const shouldCenter = computed(() => {
+    if (!containerRef.value) return false;
+    const containerWidth = containerRef.value.clientWidth;
+    return optimalContainerWidth.value < containerWidth;
+  });
+
+  // Grid configuration for debugging
+  const gridConfig = computed(() => ({
+    itemsPerRow: itemsPerRow.value,
+    optimalWidth: optimalContainerWidth.value,
+    shouldCenter: shouldCenter.value,
+    containerWidth: containerRef.value?.clientWidth || 0,
+    itemWidth: fixedItemWidth,
+    gap: itemGap,
+    padding: containerPadding,
+  }));
 
   // Update container width separately to avoid side effects in computed
   watch(itemsPerRow, () => {
@@ -203,6 +246,8 @@
     max-width: 1400px;
     min-height: 600px;
     position: relative; /* For proper positioning */
+    margin: 0 auto; /* Center the container */
+    transition: width 0.3s ease; /* Smooth width transitions */
   }
 
   .virtual-scroller {
@@ -224,14 +269,11 @@
 
   .skeleton-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 260px);
-    gap: 12px;
-    justify-content: center;
     padding: 12px;
   }
 
   .skeleton-item {
-    width: 260px;
+    width: 230px;
     height: 600px;
     margin: 6px;
     box-sizing: border-box;

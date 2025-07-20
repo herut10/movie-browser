@@ -187,12 +187,16 @@
       .main-title {
         font-size: 1.75rem;
         margin-bottom: 6px;
+        &.no-subtitle {
+          margin-bottom: 0;
+        }
       }
 
       .subtitle {
         font-size: 0.9rem;
       }
     }
+
   }
 
   /* Medium screens (md) */
