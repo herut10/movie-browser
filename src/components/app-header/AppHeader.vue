@@ -196,7 +196,6 @@
         font-size: 0.9rem;
       }
     }
-
   }
 
   /* Medium screens (md) */

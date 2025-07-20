@@ -132,17 +132,6 @@
     return optimalContainerWidth.value < containerWidth;
   });
 
-  // Grid configuration for debugging
-  const gridConfig = computed(() => ({
-    itemsPerRow: itemsPerRow.value,
-    optimalWidth: optimalContainerWidth.value,
-    shouldCenter: shouldCenter.value,
-    containerWidth: containerRef.value?.clientWidth || 0,
-    itemWidth: fixedItemWidth,
-    gap: itemGap,
-    padding: containerPadding,
-  }));
-
   // Update container width separately to avoid side effects in computed
   watch(itemsPerRow, () => {
     if (containerRef.value) {
